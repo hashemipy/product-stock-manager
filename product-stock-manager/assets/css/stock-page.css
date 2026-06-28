@@ -1,0 +1,123 @@
+/* استایل‌های ورودی دستی */
+.manual-input {
+    margin-bottom: 20px;
+    text-align: right;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.manual-input h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.manual-input input {
+    width: 150px;
+    padding: 5px;
+    font-size: 14px;
+    margin: 0 5px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.manual-input input[type="number"] {
+    width: 100px;
+}
+
+.manual-input input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+#stock-quantity {
+    border-color: #4a90e2;
+}
+
+#adjust-quantity {
+    border-color: #2ecc71;
+}
+
+.button-container {
+    display: block;
+    margin-top: 10px;
+}
+
+/* استایل دکمه‌ها */
+.psm-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #0073aa;
+}
+
+.psm-button-green {
+    background-color: green;
+}
+
+.psm-button-red {
+    background-color: red;
+}
+
+/* استایل‌های صفحه مدیریت موجودی */
+#interactive {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin: 20px auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#interactive video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#stock-result {
+    margin-top: 20px;
+    text-align: right;
+}
+
+/* تنظیمات موبایل */
+@media only screen and (max-width: 600px) {
+    #interactive {
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #interactive video {
+        width: auto;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .manual-input input {
+        width: 120px;
+        margin: 5px 3px;
+    }
+
+    .manual-input input[type="number"] {
+        width: 80px;
+    }
+
+    .psm-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}

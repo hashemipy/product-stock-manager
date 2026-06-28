@@ -1,0 +1,651 @@
+/* بهبود طراحی کلی با کارت‌ها و بک‌گراند‌های متمایز */
+.psm-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+.psm-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.psm-header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* فیلترها در کادر زیبا */
+.psm-filters {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    animation: fadeIn 0.6s ease-out;
+    border: 2px solid #e5e7eb;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.psm-search-input {
+    flex: 1;
+    min-width: 280px;
+    padding: 14px 22px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #fafbfc;
+}
+
+.psm-search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    background: white;
+    transform: translateY(-1px);
+}
+
+.psm-filter-select {
+    padding: 14px 22px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 14px;
+    background: #fafbfc;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.psm-filter-select:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+}
+
+.psm-button {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.psm-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.psm-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.psm-button-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.psm-button-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.psm-button-large {
+    padding: 16px 32px;
+    font-size: 15px;
+}
+
+.psm-button-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.psm-button-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.psm-button-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+}
+
+.psm-button-danger:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+.psm-button-small {
+    padding: 8px 14px;
+    font-size: 13px;
+    min-width: 40px;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+/* کانتینر محصولات در کادر زیبا */
+#psm-products-container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    animation: fadeIn 0.7s ease-out;
+    border: 2px solid #e5e7eb;
+}
+
+.psm-loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: #667eea;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.psm-spinner {
+    border: 4px solid #f3f4f6;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* استایل‌های جدول محصولات */
+.psm-products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.psm-products-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.psm-products-table th {
+    padding: 18px 16px;
+    text-align: right;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* بک‌گراند متمایز برای هر محصول */
+.psm-products-table tbody tr.psm-variable-product {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 3px solid #93c5fd;
+}
+
+.psm-products-table tbody tr.psm-variable-product:hover {
+    background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+    transform: scale(1.005);
+}
+
+.psm-products-table tbody tr.psm-variation-row {
+    background: #eff6ff;
+    display: none;
+    transition: all 0.3s;
+}
+
+.psm-products-table tbody tr.psm-variation-row.show {
+    display: table-row;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.psm-products-table tbody tr.psm-variation-row td:first-child {
+    padding-right: 50px;
+    border-left: 4px solid #3b82f6;
+}
+
+/* بک‌گراند متمایز برای محصولات ساده */
+.psm-products-table tbody tr.psm-simple-product {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-bottom: 3px solid #fbbf24;
+    transition: all 0.3s;
+}
+
+.psm-products-table tbody tr.psm-simple-product:hover {
+    background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
+    transform: scale(1.005);
+}
+
+/* بک‌گراند متناوب برای محصولات */
+.psm-products-table tbody tr.psm-simple-product:nth-child(4n+1) {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border-bottom: 3px solid #6ee7b7;
+}
+
+.psm-products-table tbody tr.psm-simple-product:nth-child(4n+1):hover {
+    background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+}
+
+.psm-products-table tbody tr.psm-simple-product:nth-child(4n+2) {
+    background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+    border-bottom: 3px solid #f9a8d4;
+}
+
+.psm-products-table tbody tr.psm-simple-product:nth-child(4n+2):hover {
+    background: linear-gradient(135deg, #fbcfe8 0%, #f9a8d4 100%);
+}
+
+.psm-products-table tbody tr.psm-simple-product:nth-child(4n+3) {
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+    border-bottom: 3px solid #a5b4fc;
+}
+
+.psm-products-table tbody tr.psm-simple-product:nth-child(4n+3):hover {
+    background: linear-gradient(135deg, #c7d2fe 0%, #a5b4fc 100%);
+}
+
+/* فونت پیش‌فرض برگردانده شد */
+.psm-products-table td {
+    padding: 12px 14px;
+    text-align: right;
+    font-size: 13px;
+    transition: background 0.3s;
+}
+
+/* نام محصول با ID و SKU در یک خط */
+.psm-product-name {
+    font-weight: 500;
+    color: #1f2937;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Added styles for product thumbnail images */
+.psm-product-thumbnail {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid #e5e7eb;
+    flex-shrink: 0;
+    background: #f9fafb;
+}
+
+.psm-product-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.psm-product-meta {
+    display: inline-block;
+    color: #6b7280;
+    font-size: 11px;
+    margin-right: 8px;
+    margin-bottom: 2px;
+}
+
+.psm-variable-icon {
+    display: inline-block;
+    margin-left: 8px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+}
+
+.psm-variable-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.psm-variations-count {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    margin-right: 8px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.psm-stock-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+}
+
+.psm-stock-input {
+    width: 70px;
+    padding: 8px 10px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.psm-stock-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.psm-price-input {
+    width: 90px;
+    padding: 8px 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+    direction: ltr;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.psm-price-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.psm-stock-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.psm-stock-badge.in-stock {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+}
+
+.psm-stock-badge.out-of-stock {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+}
+
+.psm-stock-badge.low-stock {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+}
+
+/* دکمه ذخیره کلی شناور در کادر زیبا */
+#psm-floating-save {
+    position: fixed;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 20px 35px;
+    border-radius: 60px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 9999;
+    animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 3px solid #667eea;
+}
+
+@keyframes slideUp {
+    from {
+        bottom: -100px;
+        opacity: 0;
+    }
+    to {
+        bottom: 35px;
+        opacity: 1;
+    }
+}
+
+.psm-save-info {
+    font-size: 14px;
+    color: #667eea;
+    font-weight: 700;
+}
+
+#psm-changes-count {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 13px;
+    margin-left: 5px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* نشان‌دهره تغییر زیباتر */
+.psm-changed {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(251, 191, 36, 0);
+    }
+}
+
+/* Add styling for variation attributes display */
+.psm-variation-attrs {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.psm-attr-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    color: #0369a1;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid #bae6fd;
+}
+
+.psm-attr-label {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.psm-attr-value {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    /* Make mobile view more compact and organized */
+    .psm-container {
+        padding: 0;
+        margin: 0;
+    }
+
+    .psm-header {
+        padding: 12px 8px;
+    }
+
+    .psm-header h1 {
+        font-size: 16px;
+        margin: 0;
+    }
+
+    /* Mobile responsive styles for product thumbnail */
+    .psm-product-thumbnail {
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        border-width: 1px;
+    }
+
+    .psm-product-name {
+        gap: 4px;
+    }
+
+    .psm-products-table {
+        font-size: 10px;
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+    }
+
+    .psm-products-table thead,
+    .psm-products-table tbody,
+    .psm-products-table tr {
+        display: table-row;
+    }
+
+    .psm-products-table th,
+    .psm-products-table td {
+        display: table-cell;
+        padding: 6px 3px;
+        font-size: 10px;
+        vertical-align: middle;
+    }
+
+    /* Optimized column widths for mobile */
+    .psm-products-table th:nth-child(1),
+    .psm-products-table td:nth-child(1) {
+        width: 35%;
+    }
+
+    .psm-products-table th:nth-child(2),
+    .psm-products-table td:nth-child(2) {
+        width: 22%;
+    }
+
+    .psm-products-table th:nth-child(3),
+    .psm-products-table td:nth-child(3) {
+        width: 18%;
+    }
+
+    .psm-products-table th:nth-child(4),
+    .psm-products-table td:nth-child(4) {
+        width: 15%;
+    }
+
+    .psm-products-table th:nth-child(5),
+    .psm-products-table td:nth-child(5) {
+        width: 10%;
+    }
+
+    .psm-stock-input {
+        width: 35px;
+        padding: 4px 2px;
+        font-size: 10px;
+    }
+
+    .psm-price-input {
+        width: 60px;
+        padding: 4px 3px;
+        font-size: 10px;
+    }
+
+    .psm-button-small {
+        padding: 4px 6px;
+        font-size: 10px;
+        min-width: 22px;
+    }
+
+    .psm-stock-controls {
+        gap: 2px;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .psm-product-name {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .psm-product-meta {
+        font-size: 8px;
+        display: inline-block;
+        margin-right: 4px;
+        margin-bottom: 2px;
+    }
+
+    .psm-variations-count {
+        padding: 3px 6px;
+        font-size: 9px;
+        margin-right: 4px;
+    }
+
+    .psm-variable-icon {
+        font-size: 11px;
+        margin-left: 4px;
+    }
+
+    .psm-stock-badge {
+        padding: 3px 6px;
+        font-size: 9px;
+        white-space: nowrap;
+    }
+
+    /* Better mobile display for variation attributes */
+    .psm-variation-attrs {
+        gap: 3px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .psm-attr-badge {
+        padding: 3px 6px;
+        font-size: 9px;
+    }
+
+    .psm-products-table tbody tr.psm-variation-row td:first-child {
+        padding-right: 20px;
+    }
+}
